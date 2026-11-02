@@ -314,6 +314,28 @@
   #nav button:hover{border-color:#d8b04a;color:#f0d79a;background:rgba(216,176,74,.14)}
   #nav button[hidden]{display:none}
 
+  /* ---------- 彩绘图案 ---------- */
+  #charms{
+    position:fixed;right:26px;bottom:96px;z-index:60;
+    display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;
+    max-width:180px;pointer-events:none;
+    transition:opacity .6s ease;
+  }
+  #charms.hidden{opacity:0}
+  .charm{
+    width:40px;height:40px;opacity:0.45;
+    filter:grayscale(1);transition:filter .8s ease,opacity .6s ease;
+    pointer-events:none;
+  }
+  .charm.on{filter:grayscale(0);opacity:.82}
+  .charm svg{width:100%;height:100%;display:block}
+  .charm .steam{opacity:0;transition:opacity .8s ease}
+  .charm.on .steam{opacity:.7;animation:steamRise 2.2s ease-in-out infinite}
+  @keyframes steamRise{
+    0%,100%{transform:translateY(0) scale(1);opacity:.5}
+    50%{transform:translateY(-3px) scale(1.08);opacity:.75}
+  }
+
   @media(max-width:860px){
     .cols{flex-direction:column;gap:24px}
     .cols .pic{flex:none;width:176px;order:-1}
@@ -367,6 +389,69 @@
 <div id="nav">
   <button id="backBtn" title="回到上一幕">◂ 返 回</button>
   <button id="reBtn" title="回到刚才的选择">↺ 重 新 选 择</button>
+</div>
+
+<!-- 彩绘图案：随选择动态变色 -->
+<div id="charms" class="hidden">
+  <!-- 酱油碟 -->
+  <div class="charm" id="charm-soy" title="借豉油">
+    <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="24" cy="26" rx="16" ry="5" fill="none" stroke="#b8a078" stroke-width="1.2"/>
+      <ellipse cx="24" cy="24" rx="14" ry="4" fill="#c9b896" opacity=".6"/>
+      <ellipse cx="24" cy="23" rx="10" ry="2.5" fill="#8a6a3a" opacity=".45"/>
+      <path d="M12 22 Q10 18 14 16" fill="none" stroke="#a89878" stroke-width=".9" opacity=".5"/>
+    </svg>
+  </div>
+  <!-- 围裙 -->
+  <div class="charm" id="charm-apron" title="围裙">
+    <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18 8 L18 14 L14 16 L14 40 L34 40 L34 16 L30 14 L30 8" fill="none" stroke="#9a8a6a" stroke-width="1.2"/>
+      <path d="M18 8 Q24 12 30 8" fill="none" stroke="#9a8a6a" stroke-width="1.2"/>
+      <path d="M20 22 Q22 28 24 26 Q26 24 28 30" fill="none" stroke="#5a3a1a" stroke-width="2.2" opacity=".55" stroke-linecap="round"/>
+      <circle cx="22" cy="20" r="1.5" fill="#6a4a2a" opacity=".4"/>
+    </svg>
+  </div>
+  <!-- 水桶 -->
+  <div class="charm on" id="charm-bucket" title="水桶">
+    <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="24" cy="14" rx="10" ry="3" fill="none" stroke="#8a7a5a" stroke-width="1.1"/>
+      <path d="M14 14 L16 38 Q24 42 32 38 L34 14" fill="none" stroke="#8a7a5a" stroke-width="1.2"/>
+      <ellipse cx="24" cy="38" rx="8" ry="2.5" fill="none" stroke="#8a7a5a" stroke-width="1.1"/>
+      <path d="M14 14 Q10 10 12 6" fill="none" stroke="#7a6a4a" stroke-width="1" opacity=".6"/>
+      <path d="M34 14 Q38 10 36 6" fill="none" stroke="#7a6a4a" stroke-width="1" opacity=".6"/>
+      <ellipse cx="24" cy="20" rx="7" ry="1.8" fill="#6a8aaa" opacity=".35"/>
+    </svg>
+  </div>
+  <!-- 煲汤锅（默认隐藏，帮助李婆婆后显示） -->
+  <div class="charm" id="charm-pot" title="煲汤" style="display:none">
+    <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="24" cy="30" rx="14" ry="5" fill="none" stroke="#8a6a3a" stroke-width="1.2"/>
+      <path d="M10 30 L12 40 Q24 44 36 40 L38 30" fill="none" stroke="#8a6a3a" stroke-width="1.2"/>
+      <ellipse cx="24" cy="40" rx="12" ry="4" fill="none" stroke="#8a6a3a" stroke-width="1.1"/>
+      <path d="M10 30 Q8 24 12 22 L36 22 Q40 24 38 30" fill="none" stroke="#8a6a3a" stroke-width="1.2"/>
+      <ellipse cx="24" cy="22" rx="12" ry="3" fill="#a88858" opacity=".25"/>
+      <!-- 锅盖把手 -->
+      <ellipse cx="24" cy="19" rx="3" ry="1.2" fill="none" stroke="#7a5a2a" stroke-width="1"/>
+      <!-- 热气 -->
+      <g class="steam">
+        <path d="M18 14 Q20 10 18 6" fill="none" stroke="#c9b896" stroke-width="1" opacity=".5"/>
+        <path d="M24 12 Q26 8 24 4" fill="none" stroke="#c9b896" stroke-width="1" opacity=".5"/>
+        <path d="M30 14 Q32 10 30 6" fill="none" stroke="#c9b896" stroke-width="1" opacity=".5"/>
+      </g>
+    </svg>
+  </div>
+  <!-- 碗筷 -->
+  <div class="charm" id="charm-bowl" title="碗筷">
+    <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="22" cy="30" rx="11" ry="5" fill="none" stroke="#9a8a6a" stroke-width="1.2"/>
+      <path d="M11 30 L13 38 Q22 41 31 38 L33 30" fill="none" stroke="#9a8a6a" stroke-width="1.2"/>
+      <ellipse cx="22" cy="38" rx="9" ry="3" fill="none" stroke="#9a8a6a" stroke-width="1.1"/>
+      <ellipse cx="22" cy="28" rx="8" ry="2" fill="#c9b896" opacity=".2"/>
+      <!-- 筷子 -->
+      <line x1="32" y1="16" x2="36" y2="34" stroke="#8a7a5a" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="36" y1="16" x2="40" y2="34" stroke="#8a7a5a" stroke-width="1.2" stroke-linecap="round"/>
+    </svg>
+  </div>
 </div>
 
 <div id="intro" class="screen">
@@ -821,6 +906,60 @@ function bumpCredit(delta){
   setTimeout(()=>f.remove(), 1600);
 }
 
+/* ---------------- 彩绘图案 ---------------- */
+const $charms = document.getElementById("charms");
+const CHARM_SOY = document.getElementById("charm-soy");
+const CHARM_APRON = document.getElementById("charm-apron");
+const CHARM_BUCKET = document.getElementById("charm-bucket");
+const CHARM_POT = document.getElementById("charm-pot");
+const CHARM_BOWL = document.getElementById("charm-bowl");
+
+function updateCharms(){
+  // 只在游戏进行中显示（不在 intro/outro）
+  const live = document.getElementById("intro").classList.contains("hidden")
+            && document.getElementById("outro").classList.contains("hidden");
+  $charms.classList.toggle("hidden", !live);
+  if(!live) return;
+
+  // 第3幕「借豉油」：选择索引1（借豉油）或2（问汤）→ 彩色；索引0（不借）→ 灰色
+  const m3 = MEM[2];
+  if(m3 && m3.picked != null){
+    const isHelp = m3.picked === 1 || m3.picked === 2;  // 借了或问了
+    CHARM_SOY.classList.toggle("on", isHelp);
+    CHARM_APRON.classList.toggle("on", isHelp);
+  } else {
+    CHARM_SOY.classList.remove("on");
+    CHARM_APRON.classList.remove("on");
+  }
+
+  // 第4幕「制水」：进入即水桶彩色（已在 HTML 默认 on）
+  // 保持 bucket 始终 on，因为制水是集体记忆
+  CHARM_BUCKET.classList.add("on");
+
+  // 第5幕「台风」：帮助李婆婆（收衫3件）→ 显示煲汤锅且彩色
+  const m4 = MEM[4];
+  if(m4 && m4.game){
+    // 从 game 结果判断：got===3 才是全收回
+    // 但 MEM[4].game 只存了 outcome 文本，没有 got 数
+    // 需要从 outcomes 反推：如果 outcome 的 c===3 就是全收回
+    const gotAll = m4.game.led && m4.game.led.done;
+    CHARM_POT.style.display = gotAll ? "block" : "none";
+    CHARM_POT.classList.toggle("on", gotAll);
+  } else {
+    CHARM_POT.style.display = "none";
+    CHARM_POT.classList.remove("on");
+  }
+
+  // 第6幕「饭桌」：选择索引0（过去吃）或2（端菜出去）→ 彩色；索引1（不饿）→ 灰色
+  const m5 = MEM[5];
+  if(m5 && m5.picked != null){
+    const isEat = m5.picked === 0 || m5.picked === 2;
+    CHARM_BOWL.classList.toggle("on", isEat);
+  } else {
+    CHARM_BOWL.classList.remove("on");
+  }
+}
+
 /* ---------------- 角落按钮 ---------------- */
 function syncNav(){
   const live = document.getElementById("intro").classList.contains("hidden")
@@ -844,6 +983,7 @@ function reselect(){
   const f=document.getElementById("fact"); if(f) f.remove();
   const lg=document.getElementById("ledger"); if(lg) lg.remove();
   delete MEM[si];
+  updateCharms();                  // 重新选择后重置彩绘图案
   phase="choices";
   $hint.textContent="选择一个回应 ▸";
   showChoices();
@@ -970,6 +1110,7 @@ function enterScene(i){
   if(gs) gClear();                 // 上一幕若还有小游戏在跑，先收掉
   $text.innerHTML="";
   hud(); paintBG();
+  updateCharms();                  // 更新彩绘图案状态
   const m=MEM[i];
   reviewing = !!m;
   if(m){
@@ -1046,6 +1187,7 @@ function pick(ch, idx, box){
   bumpCredit(ch.c);
   const d=addLine({t:"nar", y:ch.r.y, res:true, q:ch.r.q});
   d.dataset.res="1";
+  updateCharms();                  // 选择后更新彩绘图案
   phase="wait";
   clearTimeout(pick.t);
   pick.t=setTimeout(()=>{
@@ -1251,6 +1393,7 @@ function finishGame(o){
   if(o.c>0){ credit+=o.c; bumpCredit(o.c); } else { bumpCredit(0); }
   const d=addLine({t:"nar", y:o.y, res:true, q:o.q});
   d.dataset.res="1";
+  updateCharms();                  // 游戏结束后更新彩绘图案
   phase="res";                       // 结果句落位，事实卡等玩家点
   $hint.textContent="点击继续 ▸";
   syncNav();
@@ -1349,11 +1492,12 @@ document.getElementById("app").addEventListener("click", e=>{
 
 /* ---------------- 启动 ---------------- */
 document.querySelectorAll("[data-img]").forEach(el=>{ el.src = IMG[el.dataset.img]; });
-dustSetup(); hud(); paintBG();
+dustSetup(); hud(); paintBG(); updateCharms();
 document.getElementById("startBtn").addEventListener("click", e=>{
   e.stopPropagation();
   document.getElementById("intro").classList.add("hidden");
   started=true;
+  updateCharms();
   switchBed(BEDS[0].bed, BEDS[0].vol, 3200);
   enterScene(0);
 });
